@@ -4,24 +4,46 @@ using UnityEditor;
 using UnityEngine;
 using TMPro;
 using UnityEditor.Rendering;
+using System;
+using System.Collections.Generic;
+
+[Serializable]
+public class PlayerGuessData {
+    public string answer;
+    public string playerGuess;
+    public Vector2 animatorState;
+    public float guessTime;
+
+    public PlayerGuessData(string _answer, string _playerGuess,Vector2 _animatorState, float _guessTime) {
+        answer = _answer;
+        playerGuess = _playerGuess;
+        animatorState = _animatorState;
+        guessTime = _guessTime;
+    }
+}
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshPro textPanel;
     public LeftRightGenerator leftRightGenerator;
     public StareInput stareInput;
+    public PlayerData playerData;
     string answer = "";
 
     private int rounds;
     private int roundCounter = 0;
     private int correctGuesses;
     bool loading = false;
+
+    float currentGuessTime = 0f;
     public enum State {
         Menu,
         Guess,
         Load,
         Finish
     };
+
+    public List<PlayerGuessData> playerGuessData;
 
     public State gameState;
 
@@ -30,6 +52,7 @@ public class GameManager : MonoBehaviour
         rounds = 10;
         correctGuesses = 0;
         roundCounter = 0;
+        playerGuessData = new List<PlayerGuessData>();
     }
 
     private void FixedUpdate() {
@@ -41,11 +64,13 @@ public class GameManager : MonoBehaviour
                 SwitchState(State.Load);
                 loading = false;
                 roundCounter = 1;
+                //playerData.StartTest();
                 break;
 
             case State.Guess:
                 Debug.Log("The game is in the game state.");
-
+                currentGuessTime+=Time.deltaTime;
+                //Debug.Log(currentGuessTime);
                 break;
 
             case State.Load:
@@ -68,6 +93,7 @@ public class GameManager : MonoBehaviour
                 float score = (float)correctGuesses / (float)rounds;
                 score = score * 100;
                 string scoreText = score.ToString();
+                //playerData.EndTest();
                 SetText("Exercise Completed!\nYou scored a " + scoreText + 
                     "%\nTo play again, say 'yes' or 'no'");
                 break;
@@ -87,15 +113,6 @@ public class GameManager : MonoBehaviour
         textPanel.text = _text;
     }
 
-    string GenerateRandomDirection()
-    {
-        int randomIndex = Random.Range(0, 2);
-
-        string randomDirection = (randomIndex == 0) ? "Left" : "Right";
-
-        return randomDirection;
-    }
-
     IEnumerator StartCountdown()
     {
         
@@ -110,6 +127,7 @@ public class GameManager : MonoBehaviour
         SetText("Guess!");
         gameState = State.Guess;
         stareInput.canStare = true;
+        currentGuessTime = 0f;
     }
 
     public void CompareGuess(string _guess) {
@@ -124,6 +142,9 @@ public class GameManager : MonoBehaviour
         gameState = State.Load;
         loading = false;
         leftRightGenerator.HideHands();
+        PlayerGuessData newData = new PlayerGuessData(answer,_guess,leftRightGenerator.GetAnimatorState(answer), currentGuessTime);
+        playerGuessData.Add(newData);
+        Debug.Log(newData);
     }
 
     public void Replay() {

@@ -84,7 +84,6 @@ public class StareInput : MonoBehaviour
 
     void SelectOption(GameObject stareSensor)
     {
-        gameManager.CompareGuess(stareSensor.name.ToString());
         if (stareSensor.name.ToString().Equals("LeftStare")) {
             Debug.Log("Chose Left!");
             gameManager.CompareGuess("Left");
