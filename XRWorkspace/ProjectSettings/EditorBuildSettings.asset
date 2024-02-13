@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Demo_1.unity
     guid: c728208ab50e5b54c870749ae1b12e5c
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 3577f8134c7a49049b0ae96679200422, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9bec1ce6a03ccba4b9a8215241b32e63, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: a49cadc1a815591479693b955ccf08c1, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: ff722dcc56718ee459f87b0cb219eb21, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1a4c68ca72a83449f938d669337cb305, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a9a6963505ddf7f4d886008c6dc86122, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f7ea749bfec5d74408ae09fb06a4f72a, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 52ecd42e1cb69cb4db93ac890ba6c45d, type: 2}

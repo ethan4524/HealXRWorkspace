@@ -6,8 +6,8 @@ public class StareInput : MonoBehaviour
     public LayerMask objectLayer; // Layer containing the objects to detect
     public GameObject leftStareSensor;
     public GameObject rightStareSensor;
-    public loadingtext leftLoadingText;
-    public loadingtext rightLoadingText;
+    public StareThrobber leftLoadingText;
+    public StareThrobber rightLoadingText;
     public GameObject playerHead;
     public GameManager gameManager;
 
@@ -28,7 +28,7 @@ public class StareInput : MonoBehaviour
         
     }
 
-    void UpdateStare(GameObject stareSensor, ref float stareTimer, loadingtext loadingText, ref bool isStaring)
+    void UpdateStare(GameObject stareSensor, ref float stareTimer, StareThrobber loadingText, ref bool isStaring)
     {
         if (stareSensor == null || loadingText == null)
             return;
@@ -74,7 +74,7 @@ public class StareInput : MonoBehaviour
         }
     }
 
-    void ResetStare(ref float stareTimer, loadingtext loadingText, ref bool isStaring)
+    void ResetStare(ref float stareTimer, StareThrobber loadingText, ref bool isStaring)
     {
         isStaring = false;
         stareTimer = 0f;
