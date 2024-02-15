@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     private int correctGuesses;
     bool loading = false;
 
+    public MainMenuManager menuManager;
+
     float currentGuessTime = 0f;
     public enum State {
         Menu,
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             case State.Menu:
                 Debug.Log("The game is in the menu state.");
-                SwitchState(State.Load);
+                
                 loading = false;
                 roundCounter = 1;
                 //playerData.StartTest();
@@ -89,13 +91,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case State.Finish:
+                menuManager.ShowGameEndButtons();
                 Debug.Log("The game is in the finish state.");
                 float score = (float)correctGuesses / (float)rounds;
                 score = score * 100;
                 string scoreText = score.ToString();
                 //playerData.EndTest();
-                SetText("Exercise Completed!\nYou scored a " + scoreText + 
-                    "%\nTo play again, say 'yes' or 'no'");
+                SetText("Exercise Completed!\nYou scored:" + scoreText + "%");
                 break;
 
             default:
@@ -151,6 +153,7 @@ public class GameManager : MonoBehaviour
         rounds=10;
         roundCounter=1;
         correctGuesses = 0;
+        playerGuessData.Clear();
         loading=false;
         gameState = State.Menu;
     }
